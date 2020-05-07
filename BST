@@ -1,0 +1,259 @@
+#include <iostream>
+#include <queue> 
+#include <limits>
+using namespace std;
+
+#define INT_MIN -100
+#define INT_MAX 100
+
+struct Bstnode{
+    int data;
+    Bstnode* left;
+    Bstnode* right;
+};
+
+Bstnode* GetNewNode(int data){
+    Bstnode* newNode= new Bstnode();
+    //(*newNode).data=data;
+    newNode->data=data;
+    newNode->left=newNode->right=NULL;
+    
+    return newNode;
+}
+
+int findMin(Bstnode* root){
+    if(root==NULL){
+        cout<<"tree is empty";
+        return -1;
+    }
+    else if(root->left==NULL){
+        return root->data;
+    }
+    else
+    return findMin(root->left);
+}
+
+int findMax(Bstnode* root){
+    if(root==NULL){
+        cout<<"tree is empty";
+        return -1;
+    }
+    else if(root->right==NULL){
+        return root->data;
+    }
+    else
+    return findMax(root->right);
+}
+
+int height(Bstnode* root){
+    if(root==NULL) return 0;
+    else if(root->left==NULL&&root->right==NULL) return 1;
+    else return max(height(root->left),height(root->right))+1;
+}
+
+Bstnode* Insert(Bstnode* root,int data){
+    if(root==NULL){
+        root=GetNewNode(data);
+        //return root;
+    }
+    else if(data <= root->data){
+        root->left=Insert(root->left,data);
+    }
+    else{
+        root->right=Insert(root->right,data);
+    }
+    return root;
+    
+}
+
+bool Search(Bstnode* root,int data){
+    if(root==NULL){
+        return false;
+    }
+    if(root->data==data) return true;
+    else if(data>root->data){
+        return(Search(root->right,data));
+    }
+    else
+        return(Search(root->left,data));
+}
+
+Bstnode* Find(Bstnode* root,int data){
+    if(root==NULL){
+        return NULL;
+    }
+    if(root->data==data) return root;
+    else if(data>root->data){
+        return(Find(root->right,data));
+    }
+    else
+        return(Find(root->left,data));
+}
+
+//tree traversal
+
+void levelOrder(Bstnode* root){
+    if(root==NULL){
+        return NULL;
+    }
+    queue<Bstnode*> Q;
+    Q.push(root);
+    while(!Q.empty()){
+        Bstnode* current=Q.front();
+        cout<<current->data<<" ";
+        if(current->left!=NULL) Q.push(current->left);
+        if(current->right!=NULL) Q.push(current->right);
+        Q.pop();
+    }
+    
+}
+
+// void postOrder(Bstnode* root){
+//     postOrder(root->left);
+//     postOrder(root->right);
+//     cout<<root->data;
+// }
+
+void preOrder(Bstnode* root){
+    if(root==NULL) return;
+    
+    cout<<root->data<<" ";
+    preOrder(root->left);
+    preOrder(root->right);
+    
+}
+
+//check if the given BT is BST or Not
+
+// bool isSubtreeLesser(Bstnode* root,int data){
+//     if(root==NULL) return true;
+//     else if(root->data <= data && isSubtreeLesser(root->left,data) && isSubtreeLesser(root->right,data))
+//         return true;
+//     else
+//         return false;
+// }
+
+// bool isSubtreeGreater(Bstnode* root,int data){
+//     if(root==NULL) return true;
+//     else if(root->data >= data && isSubtreeLesser(root->left,data) && isSubtreeLesser(root->right,data))
+//         return true;
+//     else
+//         return false;
+// }
+
+bool isBSTUtil(Bstnode* root,int minValue, int maxValue){
+    if(root==NULL)
+        return true;
+    if(root->data >= minValue && root->data <= maxValue && isBSTUtil(root->left,minValue,root->data) 
+    && isBSTUtil(root->right,root->data,maxValue))
+        return true;
+    else
+        return false;
+}
+
+bool isBST(Bstnode* root){
+    return isBSTUtil(root,INT_MAX,INT_MIN);
+}
+
+Bstnode* Delete(Bstnode* root,int data){
+    if(root==NULL) return root;
+    else if(data<root->data)root->left=Delete(root->left,data);
+    else if(data>root->data)root->right=Delete(root->right,data);
+    else{
+        if(root->left==NULL && root->right==NULL){
+            delete root;
+            root=NULL;
+            //return root;
+        }
+        else if(root->left==NULL){
+            Bstnode* temp=root;
+            root=root->right;
+            delete temp;
+            //return root;
+        }
+        else if(root->right==NULL){
+            Bstnode* temp=root;
+            root=root->left;
+            delete temp;
+            //return root;
+        }
+        else{
+            int temp=findMin(root->right);
+            root->data=temp;
+            root->right=Delete(root->right,temp);
+        }
+    }
+    return root;
+    
+}
+
+void InOrder(Bstnode* root){
+    if(root==NULL) return;
+    InOrder(root->left);
+    cout<<root->data<<endl;
+    InOrder(root->right);
+}
+
+Bstnode* InOrderSuccessor(Bstnode* root,int data){
+    Bstnode* current=Find(root,data);
+    if(current==NULL) return NULL;
+    
+    if(current->right!=NULL){
+        return findMin(current->right);
+    }
+    
+    else{
+        Bstnode* successor=NULL;
+        Bstnode* ancestor=root;
+        
+        while(ancestor!=current){
+            if(current->data<ancestor->data){
+                successor=ancestor;
+                ancestor=ancestor->left;
+            }
+            else
+                ancestor=ancestor->right;
+        }
+        return successor;
+    }
+}
+
+int main() {
+    Bstnode* root;
+    root=NULL;
+    root=Insert(root,15);
+    root=Insert(root,10);
+    root=Insert(root,20);root=Insert(root,2);
+    root=Insert(root,25);root=Insert(root,8);root=Insert(root,12);
+    
+    int number;
+    cin>>number;
+    if(Search(root,number)==true)cout<<"Found\n";
+    else cout<<"Not Found\n";
+    
+    cout<<findMin(root)<<endl;
+    cout<<findMax(root)<<endl;
+    
+    cout<<height(root)<<endl;
+    
+    levelOrder(root);
+    
+    cout<<endl;
+    
+    preOrder(root);
+    
+    cout<<endl;
+    
+    cout<<isBST(root)<<endl;
+    
+    root=Delete(root,2);
+    
+    cout<<findMin(root)<<endl;
+    
+    Bstnode* temp;
+    temp=InOrderSuccessor(root,20);
+    
+    cout<<temp->data<<endl;
+    
+	return 0;
+}
