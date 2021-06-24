@@ -1,0 +1,13 @@
+public static int sumExists(int arr[], int N, int sum)
+    {
+       //Your code here, Geeks
+       HashSet<Integer> hs = new HashSet<Integer>();
+       
+       for(int i : arr){
+            if(hs.contains(sum-i))
+                return 1;
+            else
+                hs.add(i);
+        }
+        return 0;
+    }
