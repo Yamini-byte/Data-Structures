@@ -1,0 +1,20 @@
+ static long countNonRepeated(int arr[], int n)
+    {
+        // add your code
+        long count =0;
+        HashMap<Integer,Integer> hm = new HashMap<Integer,Integer>();
+        for(int i=0;i<n;i++){
+            if(hm.containsKey(arr[i]) == true){
+                hm.put(arr[i], hm.get(arr[i])+1);
+            }
+            else{
+                hm.put(arr[i],1);
+            }
+        }
+        for(Map.Entry<Integer,Integer> i: hm.entrySet()){
+            if(i.getValue() ==1){
+                count++;
+            }
+        }
+        return count;
+    }
