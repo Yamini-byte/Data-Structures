@@ -1,0 +1,12 @@
+public static int countWords(String str)
+    {
+        // find and return the number of words 
+        // present in the string
+        int count=1;
+        for(char ch : str.toCharArray()){
+            if(ch == ' '){
+                count++;
+            }
+        }
+        return count;
+    }
