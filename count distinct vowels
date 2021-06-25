@@ -1,0 +1,11 @@
+public static int countVowels(String str)
+    {
+        // count distinct vowels present in string
+        HashSet<Character> hs = new HashSet<Character>();
+        for(char ch :str.toCharArray()){
+            if(ch == 'a' || ch == 'e' ||ch == 'i' ||ch == 'o' ||ch == 'u'){
+                hs.add(ch);
+            }
+        }
+        return hs.size();
+    }
