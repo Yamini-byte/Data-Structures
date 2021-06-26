@@ -1,0 +1,21 @@
+public static boolean searchLinkedList(Node head, int x)
+    {
+        // Your code here
+        Node curr = head;
+        if(curr == null) return false;
+        if(curr.next == null){
+            if(curr.data == x){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        while(curr != null){
+            if(curr.data == x){
+                return true;
+            }
+            curr = curr.next;
+        }
+        return false;
+    }
