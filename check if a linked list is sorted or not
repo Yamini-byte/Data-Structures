@@ -1,0 +1,36 @@
+class Solution
+{
+    static boolean isAsc(Node head){
+        while(head.next != null && head.data <= head.next.data){
+            head = head.next;
+        }
+        if(head.next == null){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    static boolean isDec(Node head){
+        while(head.next != null && head.data >= head.next.data){
+            head = head.next;
+        }
+        if(head.next == null){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public static boolean isSorted(Node head)
+    {
+        // your code here 
+        Node curr = head;
+        if(curr == null || curr.next == null){
+            return true;
+        }
+        //while(curr.next != null && curr.data <=)
+        return isAsc(head)||isDec(head);
+    }
+    
+}
