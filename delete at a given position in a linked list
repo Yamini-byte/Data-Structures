@@ -1,0 +1,23 @@
+Node deleteAtPosition(Node head, int pos)
+    {
+        // your code here
+        Node curr = head;
+        Node j = curr;
+        if(pos == 1){
+            if(curr == null || curr.next == null){
+                head = null;
+                return head;
+            }
+            else{
+                head = head.next;
+                return head;
+            }
+        }
+        while(curr != null && --pos>0){
+            j=curr;
+            curr=curr.next;
+        }
+        j.next = curr.next;
+        curr.next = null;
+        return head;
+    }
