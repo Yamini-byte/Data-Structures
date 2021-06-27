@@ -1,0 +1,14 @@
+static Node deleteTail(Node head)
+    {
+        // Your code here
+        Node curr = head;
+        if(curr == null || curr.next == null){
+            head = null;
+            return head;
+        }
+        while(curr.next.next != null){
+            curr = curr.next;
+        }
+        curr.next = null;
+        return head;
+    }
