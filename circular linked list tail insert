@@ -1,0 +1,22 @@
+public static Node insertInTail(Node head, int data)
+    {
+        Node temp = new Node(data);
+        if(head == null){
+            head=temp;
+            head.next = head;
+            return head;
+        }
+        if(head.next == null){
+            head.next = temp;
+            temp.next = head;
+            return head;
+        }
+        temp.next=head.next;
+        head.next = temp;
+        int t = temp.data;
+        temp.data = head.data;
+        head.data = t;
+        return temp;
+        // your code here
+        
+    }
