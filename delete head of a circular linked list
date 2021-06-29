@@ -1,0 +1,21 @@
+public static Node deleteHead(Node head)
+    {
+         // your code here
+         if(head == null) return null;
+         if(head.next == head) return null;
+        //  if(head.next.next == null){
+        //      head.next.next = head.next;
+             
+        //      head = head.next;
+        //      return head;
+        //  }
+        Node temp = head.next;
+         Node curr = head;
+         while(curr.next != head){
+             curr = curr.next;
+         }
+         curr.next = temp;
+         head.next = null;
+         return curr.next;
+        
+    }
