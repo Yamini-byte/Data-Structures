@@ -1,0 +1,19 @@
+public static void insertAtPosition(Node head, int pos, int data)
+    {
+        // your code here
+        Node curr = head;
+        Node temp = new Node(data);
+        int count = 0;
+        if(head == null) return;
+        do{
+            count++;
+            curr=curr.next;
+        }while(curr!=head);
+        if(pos > count) return;
+        curr = head;
+        for(int i=1;i<pos;i++){
+            curr = curr.next;
+        }
+        temp.next = curr.next;
+        curr.next = temp;
+    }
