@@ -1,0 +1,24 @@
+public static Node deleteAtPosition(Node head, int pos)
+    {
+        // your code here
+        Node curr = head;
+        if(head == null) return null;
+        if(pos == 1){
+            while(curr.next!=head){
+                curr=curr.next;
+            }
+            Node temp = head;
+            curr.next = head.next;
+            head = head.next;
+            temp.next = null;
+            return head;
+        }
+        curr = head;
+        for(int i=1;i<pos-1;i++){
+            curr = curr.next;
+        }
+        Node temp = curr.next;
+        curr.next = temp.next;
+        temp.next=null;
+        return head;
+    }
