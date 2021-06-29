@@ -1,0 +1,24 @@
+public static Node insertInHead(Node head, int data)
+    {
+        Node temp = new Node(data);
+        if(head == null){
+            head = temp;
+            return head;
+        }
+        if(head.next == head){
+            head.next = temp;
+            temp.next = head;
+            int t = temp.data;
+            temp.data = head.data;
+            head.data = t;
+            return head;
+        }
+        temp.next = head.next;
+        head.next = temp;
+        int t = temp.data;
+        temp.data = head.data;
+        head.data = t;
+        return head;
+        // your code here
+        
+    }
