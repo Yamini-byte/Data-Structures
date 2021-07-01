@@ -1,0 +1,21 @@
+void addNode(Node head_ref, int pos, int data)
+	{
+		// Your code here
+		Node temp = new Node(data);
+		if(head_ref == null) head_ref = temp;
+		Node curr = head_ref;
+		while(--pos >= 0){
+		    curr = curr.next;
+		}
+		if(curr.next == null){
+		    curr.next = temp;
+		    temp.prev = curr;
+		}
+		else{
+		temp.next = curr.next;
+		curr.next.prev = temp;
+		curr.next = temp;
+		temp.prev = curr;
+		}
+// 		return head_ref;
+	}
