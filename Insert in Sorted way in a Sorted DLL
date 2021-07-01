@@ -1,0 +1,42 @@
+public static Node sortedInsert(Node head, int x)
+    {
+        // add your code here
+        Node temp = new Node(x);
+        if(head == null) return temp;
+        if(head.next == null){
+            if(head.data < temp.data){
+                head.next = temp;
+                temp.prev = head;
+                return head;
+            }
+            else{
+                temp.next = head;
+                head.prev = temp;
+                return temp;
+            }
+        }
+        else if(temp.data <= head.data){
+            temp.next = head;
+            head.prev = temp;
+            return temp;
+        }
+        else{
+            Node curr = head;
+            while(curr.next!=null &&curr.next.data <= temp.data){
+                curr = curr.next;
+            }
+            if(curr.next == null){
+                curr.next = temp;
+                temp.prev = curr;
+                return head;
+            }
+            else{
+                temp.next = curr.next;
+                curr.next.prev = temp;
+                temp.prev = curr;
+                curr.next = temp;
+                return head;
+            }
+        }
+        //return head;
+    }
