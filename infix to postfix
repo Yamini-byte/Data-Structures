@@ -1,0 +1,52 @@
+public static String infixToPostfix(String exp) 
+	{
+	    Stack<Character> st = new Stack<>();
+	    String result = "";
+	    for(int i=0;i<exp.length();i++){
+	        char c = exp.charAt(i);
+	        
+	        if(Character.isLetterOrDigit(c)){
+	            result += c;
+	        }
+	        
+	        else if(c == '('){
+	            st.push(c);
+	        }
+	        
+	        else if(c == ')'){
+	            while(!st.isEmpty() && st.peek()!='('){
+	                result += st.pop();
+	            }
+	            st.pop();
+	        }
+	        //else an operator is found
+	        else{
+	            while(!st.isEmpty() && prec(c)<=prec(st.peek())){
+	                result += st.pop();
+	            }
+	            st.push(c);
+	        }
+	        
+	    }
+	    while(!st.isEmpty()){
+	        if(st.peek()=='('){
+	            return "Invalid expression";
+	        }
+	        result+=st.pop();
+	       
+	    }
+	     return result;
+		// Your code here
+	} 
+	public static int prec(char s){
+	    int i;
+	    switch(s){
+	       case '^' : i=4; break;
+	       case '*' :
+	       case '/' : i=3; break;
+	       case '+' :
+	       case '-' : i=1; break;
+	       default: i=0;
+	    }
+	    return i;
+	}
