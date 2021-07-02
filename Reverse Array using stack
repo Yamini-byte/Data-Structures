@@ -1,0 +1,11 @@
+public static void reverseArray(int n, int arr[])
+    {
+        // Reverse the array using stack
+        Stack<Integer> s = new Stack<>();
+        for(int i=0;i<n;i++){
+            s.push(arr[i]);
+        }
+        for(int i=0;i<n;i++){
+            arr[i]=(Integer)s.pop();
+        }
+    }
