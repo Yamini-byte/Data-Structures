@@ -1,0 +1,19 @@
+static boolean ispar(String x)
+    {
+        Stack<Character> st = new Stack<>();
+        for(char ch:x.toCharArray()){
+            if(ch == '{' || ch == '(' || ch == '['){
+                st.push(ch);
+            }
+            else{
+                if(st.isEmpty()==true) return false;
+                else if(matchPair((Character)st.peek(), ch) == false) return false;                char c = (Character)st.peek();
+                st.pop();
+            }
+        }
+        return(st.isEmpty()==true);
+        // add your code here
+    }
+    static boolean matchPair(char c, char ch){
+        return ((c=='(' && ch ==')')||(c=='[' && ch==']')||(c=='{'&&ch=='}'));
+    }
