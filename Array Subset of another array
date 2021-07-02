@@ -1,0 +1,14 @@
+public String isSubset( long a1[], long a2[], long n, long m) {
+        // Arrays.sort(a1);
+        // Arrays.sort(a2);
+        HashSet<Long> hs = new HashSet<Long>();
+        for(long i:a1){
+            hs.add(i);
+        }
+        //long j=0;
+        for(long i : a2){
+            if(hs.contains(i) == false) return "No";
+        }
+        return "Yes";
+        
+    }
