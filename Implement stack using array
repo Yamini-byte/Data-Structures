@@ -1,0 +1,36 @@
+public void push(int data)
+    {
+        //Your code here
+        if(top == stackMax-1){
+            System.out.println("Stack Full");
+        }
+        else{
+            stack[++top] = data;
+        }
+    }
+    
+    //Function to pop the topmost data
+    public  void pop()
+    {
+        if(top < 0){
+            System.out.println("Stack Empty");
+        }
+        else{
+            top--;
+        }
+        //Your code here
+    }
+    
+    //Function to display the stack from index 0 
+    public  void display()
+    {
+        int temp=top;
+        if(top < 0) {System.out.println("-1");}
+        else{
+        for(int i=0;i<=temp;i++){
+            System.out.print(stack[i]+" ");
+        }
+        System.out.println();
+        }
+        //Your code here
+    }
