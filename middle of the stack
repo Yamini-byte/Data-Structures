@@ -1,0 +1,14 @@
+public static int stackMiddle(int n, Stack<Integer> st)
+    {
+        int[] arr = new int[n];
+        for(int i=n-1;i>=0;i--){
+            arr[i] = (Integer)st.pop();
+        }
+        if(n%2 == 1){
+            return arr[(int)n/2];
+        }
+        else
+            return arr[(n/2)-1];
+        
+         // Find and return the middle element of Stack
+    }
